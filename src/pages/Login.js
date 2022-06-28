@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './layouts/Header'
 import '../App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import loginMiddle from '../redux/middleWares/loginMiddle';
 import { connect } from 'react-redux';
 import { WithRouter } from './layouts/withRouter/WithRouter'
+import { toast, ToastContainer } from 'react-toastify';
 
 
  class Login extends Component {
@@ -35,7 +37,7 @@ import { WithRouter } from './layouts/withRouter/WithRouter'
     // console.log("login Click")
     this.props.loginMiddle(this.state.loginData);
     
-    (localStorage.getItem('token'))?this.props.navigate('/'):this.props.navigate('/login')
+    (localStorage.getItem('token'))?this.props.navigate('/'):toast.error('Please Login')
 
   }
   
@@ -53,6 +55,7 @@ import { WithRouter } from './layouts/withRouter/WithRouter'
               </div>
             </form>
           </div>
+          <ToastContainer  />
         </>
     )
   }
