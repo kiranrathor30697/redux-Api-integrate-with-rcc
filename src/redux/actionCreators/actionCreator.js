@@ -1,4 +1,4 @@
-import { GETUSERDATA, LOGIN, LOGOUT, REGISTER } from "../constants/constants"
+import { GETUSERDATA, LOGIN, LOGOUT, REGISTER, UPDATEIMG } from "../constants/constants"
 
 export const loginActionCreator = (login_data) =>{
     return {
@@ -18,6 +18,13 @@ export const getUserActionCreator = (get_user) => {
     return{
         type:GETUSERDATA,
         payload:get_user
+    }
+}
+
+export const updateImgActionCreator = (updt_img) => {
+    return{
+        type:UPDATEIMG,
+        payload:updt_img
     }
 }
 

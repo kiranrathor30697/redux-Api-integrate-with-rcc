@@ -28,12 +28,20 @@ import Header from './layouts/Header';
       }      
     })
   }
+
+  handleRegisterImg = (e) => {
+    console.log(e.target.files[0])
+   this.state.reg_data.profilePic = e.target.files[0]
+  }
+
+
   RegisterForm = (e) => {
     e.preventDefault()
     let token = localStorage.getItem('token')  
     // console.log(this.props)
     this.props.registerMiddle(this.state.reg_data,token)
   }
+
   render() {
     return (
       <>
@@ -42,11 +50,8 @@ import Header from './layouts/Header';
           <form className='w-25 offset-4 border p-5'>
             <h3 className='App mb-4'> Register Form</h3>
             <input type="text" className='form-control mb-4 text-center' onChange={(e)=>{this.handleRegister(e)}} name="userName" placeholder='Enter UserName' />
-            <input type="email" className='form-control text-center' onChange={(e)=>{this.handleRegister(e)}} name="email" placeholder='Enter Email' />
-            <div className='border p-2 mt-4 mb-4 rounded text-center'>
-              <label htmlFor='profilePic' className='text-secondary'>Profile Picture</label>
-              <input type="file" id='profilePic' className='form-control' hidden onChange={(e)=>{this.handleRegister(e)}} name="profilePic" placeholder='Select Profile' />
-            </div>
+            <input type="email" className='form-control text-center mb-4' onChange={(e)=>{this.handleRegister(e)}} name="email" placeholder='Enter Email' />
+            <input type="file" accept="image/*" id='profilePic' className='form-control mb-4' onChange={(e)=>{this.handleRegisterImg(e)}} name="profilePic" placeholder='Select Profile' />
             <input type="password" className='form-control text-center mb-4' onChange={(e)=>{this.handleRegister(e)}} name="password" placeholder='Enter Password' />
             <input type="password" className='form-control text-center mb-4' onChange={(e)=>{this.handleRegister(e)}} name="confirmPassword" placeholder='Enter Confirm Password' />
             <div className='App mt-4'>
@@ -72,3 +77,60 @@ const mapDispatchToProps = (dispatch) =>{
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (Register)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <div className='border p-2 mt-4 mb-4 rounded text-center'>
+//               <label htmlFor='profilePic' className='text-secondary'>Profile Picture</label>
+//               <input type="file" id='profilePic' className='form-control' onChange={(e)=>{this.handleRegisterImg(e)}} name="profilePic" placeholder='Select Profile' />
+//             </div>

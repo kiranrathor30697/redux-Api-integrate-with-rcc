@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getUserMiddle from '../redux/middleWares/getUserMiddle';
+import {updateImgMiddle} from '../redux/middleWares/updateImgMiddle';
 import Header from './layouts/Header'
 
  class GetUser extends Component {
@@ -18,7 +19,14 @@ import Header from './layouts/Header'
     getUser = () => {
         let token = JSON.parse(localStorage.getItem('token'))
        this.props.getUserMiddle(token);
+       console.log(this.props)
 
+    }
+
+    changeImg = () => {
+        let token = JSON.parse(localStorage.getItem('token'))
+        console.log(this.state)
+        // this.props.updateImgMiddle(this.state.getUserData,token)
     }
 
   render() {
@@ -28,7 +36,6 @@ import Header from './layouts/Header'
         <>
             <Header />
             <button onClick={()=>{this.getUser()}} hidden>Get User</button>
-            {console.log(data)}
             <TableContainer>
                 <Table aria-label="simple table">
                 <TableHead>
@@ -37,6 +44,7 @@ import Header from './layouts/Header'
                     <TableCell align="center"><h5><b>User Name</b></h5></TableCell>
                     <TableCell align="center"><h5><b>Email</b></h5></TableCell>
                     <TableCell align="center"><h5><b>Profile Pic</b></h5></TableCell>
+                    <TableCell align="center"><h5><b>Profile Update</b></h5></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -47,7 +55,19 @@ import Header from './layouts/Header'
                             <TableCell align="center"><h5>{idx+1}</h5></TableCell>
                             <TableCell align="center"><h5>{cv.userName}</h5></TableCell>
                             <TableCell align="center"><h5>{cv.email}</h5></TableCell>
-                            <TableCell align="center"><h5>{cv.profilePic}</h5></TableCell>
+                            <TableCell align="center"><h5>{
+                            <img 
+                            src={cv.profilePic}
+                            alt="Image not Found"
+                            height={400}
+                            width={400}
+                            />
+                            }</h5></TableCell>
+                            <TableCell align="center">
+                                <h5>
+                                    <button className='btn btn-info' onClick={()=>{this.changeImg()}}>Update Profile</button>
+                                </h5>
+                            </TableCell>
                         </TableRow>
                         ))
                     }
@@ -66,8 +86,9 @@ import Header from './layouts/Header'
 }
 const mapStateToProps = (state) => {
     // console.log(state.getUserReducer.get_user)
+    console.log(state)
     return {
-        mydata:state.getUserReducer.get_user
+        mydata:state
     }
 }
 
@@ -75,6 +96,9 @@ const mapDispatchToProps = (dispatch) => {
     return{
         getUserMiddle:(getUserData)=>{
             dispatch(getUserMiddle(getUserData))
+        },
+        updateImgMiddle:(updt_data)=>{
+            dispatch(updateImgMiddle(updt_data))
         }
     }
 }
