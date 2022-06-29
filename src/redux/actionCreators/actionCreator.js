@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER } from "../constants/constants"
+import { GETUSERDATA, LOGIN, LOGOUT, REGISTER } from "../constants/constants"
 
 export const loginActionCreator = (login_data) =>{
     return {
@@ -7,9 +7,17 @@ export const loginActionCreator = (login_data) =>{
     }
 }
 
-export const registerActionCreator = () =>{
+export const registerActionCreator = (reg_data) =>{
     return {
-        type:REGISTER
+        type:REGISTER,
+        payload:reg_data
+    }
+}
+
+export const getUserActionCreator = (get_user) => {
+    return{
+        type:GETUSERDATA,
+        payload:get_user
     }
 }
 

@@ -17,8 +17,8 @@ export default class Header extends Component {
                   </li>
 
                   <li className="nav-item">
-                    <Link className="nav-link text-white fs-5" to="/inc_dec">
-                      Inc/Dec
+                    <Link className="nav-link text-white fs-5" to="/getuser">
+                      Get User
                     </Link>
                   </li>
 

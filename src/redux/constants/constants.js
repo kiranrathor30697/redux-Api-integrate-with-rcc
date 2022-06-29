@@ -1,7 +1,7 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
-// export const LOGIN = "LOGIN";
+export const GETUSERDATA = "GETUSERDATA";
 // export const LOGIN = "LOGIN";
 // export const LOGIN = "LOGIN";
 // export const LOGIN = "LOGIN";

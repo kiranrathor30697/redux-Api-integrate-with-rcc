@@ -37,7 +37,7 @@ import { toast, ToastContainer } from 'react-toastify';
     // console.log("login Click")
     this.props.loginMiddle(this.state.loginData);
     
-    (localStorage.getItem('token'))?this.props.navigate('/'):toast.error('Please Login')
+    // (localStorage.getItem('token'))?this.props.navigate('/'):toast.error('Please Login')
 
   }
   

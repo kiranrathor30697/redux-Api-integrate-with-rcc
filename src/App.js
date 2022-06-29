@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import ProtectedRoute from './routes/ProtectedRoute';
+import Table from './pages/Table';
+import GetUser from './pages/GetUser';
 
 function App() {
   return (
@@ -13,9 +15,11 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />} /> 
           <Route path='/' element={<Home />} /> 
+          <Route path='/getuser' element={<GetUser />} /> 
+          <Route path='/register' element={<Register />} /> 
           <Route path="/" element={<ProtectedRoute/>} >
             <Route path='/logout' element={<Logout />} /> 
-            <Route path='/register' element={<Register />} /> 
+            <Route path='/table' element={<Table />} /> 
           </Route>
         </Routes>
       </BrowserRouter>
