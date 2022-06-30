@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import getUserMiddle from '../redux/middleWares/getUserMiddle';
 import {updateImgMiddle} from '../redux/middleWares/updateImgMiddle';
 import Header from './layouts/Header'
+import {WithRouter} from './layouts/withRouter/WithRouter'
 
  class GetUser extends Component {
     constructor(props){
@@ -19,19 +20,25 @@ import Header from './layouts/Header'
     getUser = () => {
         let token = JSON.parse(localStorage.getItem('token'))
        this.props.getUserMiddle(token);
-       console.log(this.props)
+    //    console.log(this.props)
 
     }
 
-    changeImg = () => {
+    changeImg = (idx) => {
+        this.props.navigate('/changeimg');
+
         let token = JSON.parse(localStorage.getItem('token'))
-        console.log(this.state)
-        // this.props.updateImgMiddle(this.state.getUserData,token)
+        let changeData = this.props.mydata.getUserReducer.get_user.data[idx]
+        console.log(changeData)
+        this.props.updateImgMiddle(changeData,token)
     }
 
   render() {
-    let data =  this.props.mydata.data
-
+    let data =  this.props.mydata.getUserReducer.get_user.data
+    // console.log(data)
+    let userData = JSON.parse(localStorage.getItem('userData'))
+    // console.log(userData.email)
+    // console.log(this.props.mydata.getUserReducer.get_user)
     return (
         <>
             <Header />
@@ -65,7 +72,10 @@ import Header from './layouts/Header'
                             }</h5></TableCell>
                             <TableCell align="center">
                                 <h5>
-                                    <button className='btn btn-info' onClick={()=>{this.changeImg()}}>Update Profile</button>
+                                    {
+                                        (userData.userName == cv.userName)&&
+                                        <button className='btn btn-info' onClick={()=>{this.changeImg(idx)}}>Update Profile</button>                                        // null
+                                    }
                                 </h5>
                             </TableCell>
                         </TableRow>
@@ -74,19 +84,14 @@ import Header from './layouts/Header'
                 </TableBody>
                 </Table>
             </TableContainer>
-            {
-                data?.length > 0 &&
-                data.map((cv)=>{
-                    
-                })
-            }
+           
         </>
     );
   }
 }
 const mapStateToProps = (state) => {
-    // console.log(state.getUserReducer.get_user)
-    console.log(state)
+    console.log(state.getUserReducer.get_user.data)
+    // console.log(state)
     return {
         mydata:state
     }
@@ -102,4 +107,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps) (GetUser)
+export default connect(mapStateToProps,mapDispatchToProps) (WithRouter(GetUser))

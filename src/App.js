@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Table from './pages/Table';
 import GetUser from './pages/GetUser';
+import ChangeImg from './pages/ChangeImg';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Home />} /> 
           <Route path='/getuser' element={<GetUser />} /> 
           <Route path='/register' element={<Register />} /> 
+          <Route path='/changeimg' element={<ChangeImg />} /> 
           <Route path="/" element={<ProtectedRoute/>} >
             <Route path='/logout' element={<Logout />} /> 
             <Route path='/table' element={<Table />} /> 
