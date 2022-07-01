@@ -27,10 +27,10 @@ import {WithRouter} from './layouts/withRouter/WithRouter'
     changeImg = (idx) => {
         this.props.navigate('/changeimg');
 
-        let token = JSON.parse(localStorage.getItem('token'))
-        let changeData = this.props.mydata.getUserReducer.get_user.data[idx]
-        console.log(changeData)
-        this.props.updateImgMiddle(changeData,token)
+        // let token = JSON.parse(localStorage.getItem('token'))
+        // let changeData = this.props.mydata.getUserReducer.get_user.data[idx]
+        // console.log(changeData)
+        // this.props.updateImgMiddle(changeData,token)
     }
 
   render() {
