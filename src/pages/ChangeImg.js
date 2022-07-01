@@ -4,51 +4,74 @@ import getUserMiddle from '../redux/middleWares/getUserMiddle';
 import { WithRouter } from './layouts/withRouter/WithRouter';
 import changeImg from './changeImg.css'
 import { updateImgMiddle } from '../redux/middleWares/updateImgMiddle';
+import Header from './layouts/Header';
 
  class ChangeImg extends Component {
      constructor(){
          super()
          this.state = {
-             myimgdata:{
+            myimgdata:{
                 email:'',
-                profilePic:''
-             }
+                profilePic:'',
+                userName:''
+            }
          }
      }
+
+     componentDidMount(){
+        let userData = JSON.parse(localStorage.getItem('userData'))
+        console.log(userData.userName)
+        this.setState({
+             myimgdata:{
+                 ...this.state.myimgdata,
+                 email:userData.email,
+                 profilePic:userData.profilePic,
+                 userName:userData.userName
+             }
+        })
+     }
      changeUserEmail = (e) => {
-        //  console.log('chenged');
         console.log(e.target.value)
         this.setState({
             myimgdata:{
                 ...this.state.myimgdata,
-                email:e.target.value
+                email:e.target.value,
             }
         })
      }
      changeUserImg = (e) => {
-        console.log(e.target.value)
+        //  console.log(e.target.files[0]);
+        let profilePic = e.target.files[0]
+        this.state.myimgdata.profilePic = profilePic
      }
+     
      changeProfile = (e) => {
          e.preventDefault();
          let token = JSON.parse(localStorage.getItem('token'))
-         this.props.dispatch(updateImgMiddle(this.state.myimgdata,token))
+        //  console.log(token)
+         console.log(this.state.myimgdata)
+         this.props.updateImgMiddle(this.state.myimgdata,token)
      }
   render() {
     let userData = JSON.parse(localStorage.getItem('userData'))
-    console.log(userData.profilePic)
+    let updateImg = JSON.parse(localStorage.getItem('update_data'))
+    console.log(updateImg)
+    {console.log(this.state)}
     return (
       <>
+      <Header />
         <form className='w-50 mx-auto border p-4 mt-5'>
             <h4 className='mb-4 text-center'>Change image</h4>
-            <input type="email" className='form-control mb-4' value={userData.email} onChange={(e)=>{this.changeUserEmail(e)}} name='email' /> 
+            <input type="email" className='form-control mb-4' value={this.state.myimgdata.email} onChange={(e)=>{this.changeUserEmail(e)}} name='email' /> 
             <div className='image text-center' >
-                <img src={userData.profilePic} />
+                <img src={userData.profilePic}  className='image'/>
+                
             </div>
             <label htmlFor='img' className='updt_img'>
-                <input type="file" id='img' className='form-control mb-4' onChange={(e)=>{this.changeUserImg(e)}} hidden  accept='image/*' name='profilePic' />            
+                <input type="file" id='img' hidden className='form-control mb-4' onChange={(e)=>{this.changeUserImg(e)}}  accept='image/*' name='profilePic' />            
             </label>
-            <div className='text-center'>
-                <button type='submit' className='btn btn-success' onClick={(e)=>{this.changeProfile(e)}}>Change Image</button>
+            <div className='text-center mt-5 '>
+                <button type='submit' className='btn btn-success mybtn' onClick={(e)=>{this.changeProfile(e)}}>Change Image</button>
             </div>
         </form>
       </>
@@ -56,7 +79,7 @@ import { updateImgMiddle } from '../redux/middleWares/updateImgMiddle';
   }
 }
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         state:state
     }
@@ -65,6 +88,9 @@ const mapDispatchToProps = (dispatch) => {
     return{
         getUserMiddle:(getUserData)=>{
             dispatch(getUserMiddle(getUserData))
+        },
+        updateImgMiddle:(updateUser,token)=>{
+            dispatch(updateImgMiddle(updateUser,token))
         }
     }
 }

@@ -19,8 +19,8 @@ function App() {
           <Route path='/getuser' element={<GetUser />} /> 
           <Route path='/register' element={<Register />} /> 
           <Route path='/changeimg' element={<ChangeImg />} /> 
+          <Route path='/logout' element={<Logout />} /> 
           <Route path="/" element={<ProtectedRoute/>} >
-            <Route path='/logout' element={<Logout />} /> 
             <Route path='/table' element={<Table />} /> 
           </Route>
         </Routes>

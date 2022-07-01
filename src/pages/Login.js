@@ -34,8 +34,16 @@ import { toast, ToastContainer } from 'react-toastify';
 
   loginForm = (e) => {
     e.preventDefault()
-    // console.log("login Click")
     this.props.loginMiddle(this.state.loginData);
+    
+    setTimeout(()=>{
+      let token = localStorage.getItem('token')
+      let userData = localStorage.getItem('userData')
+      if(token && userData){
+        alert('login successfully')
+        this.props.navigate('/getuser')
+      }
+    },1000)
     
     // (localStorage.getItem('token'))?this.props.navigate('/'):toast.error('Please Login')
 
@@ -61,7 +69,7 @@ import { toast, ToastContainer } from 'react-toastify';
   }
 }
 const  mapStateToProps = (state) => {
-  console.log(state.loginReducer.logindata)
+  // console.log(state.loginReducer.logindata)
    return {
      state:state.loginReducer.logindata
    } 
