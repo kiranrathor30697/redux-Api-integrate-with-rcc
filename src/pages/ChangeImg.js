@@ -54,15 +54,13 @@ import Header from './layouts/Header';
      }
   render() {
     let userData = JSON.parse(localStorage.getItem('userData'))
-    let updateImg = JSON.parse(localStorage.getItem('update_data'))
-    console.log(updateImg)
     {console.log(this.state)}
     return (
       <>
       <Header />
         <form className='w-50 mx-auto border p-4 mt-5'>
             <h4 className='mb-4 text-center'>Change image</h4>
-            <input type="email" className='form-control mb-4' value={this.state.myimgdata.email} onChange={(e)=>{this.changeUserEmail(e)}} name='email' /> 
+            <input type="email" className='form-control mb-4 em' value={this.state.myimgdata.email} onChange={(e)=>{this.changeUserEmail(e)}} name='email' /> 
             <div className='image text-center' >
                 <img src={userData.profilePic}  className='image'/>
                 
