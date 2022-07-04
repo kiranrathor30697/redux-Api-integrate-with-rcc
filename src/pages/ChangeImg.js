@@ -45,13 +45,27 @@ import Header from './layouts/Header';
         this.state.myimgdata.profilePic = profilePic
      }
      
-     changeProfile = (e) => {
+    changeProfile = (e) => {
          e.preventDefault();
          let token = JSON.parse(localStorage.getItem('token'))
-        //  console.log(token)
-         console.log(this.state.myimgdata)
-         this.props.updateImgMiddle(this.state.myimgdata,token)
-     }
+        let userData = JSON.parse(localStorage.getItem('userData')) 
+
+        if(this.state.myimgdata.profilePic == userData.profilePic){
+            const {email} = this.state.myimgdata
+
+            const updt = {email}
+            this.props.updateImgMiddle(updt,token)
+
+         }else{
+            // this.state.myimgdata.email = this.state.myimgdata.email
+            // this.state.myimgdata.profilePic = this.state.myimgdata.profilePic
+            const {email,profilePic} = this.state.myimgdata
+            const update = {email,profilePic}
+
+            this.props.updateImgMiddle(update,token)
+
+         }
+        }
   render() {
     let userData = JSON.parse(localStorage.getItem('userData'))
     {console.log(this.state)}
